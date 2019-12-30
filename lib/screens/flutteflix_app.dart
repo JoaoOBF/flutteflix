@@ -1,4 +1,7 @@
+import 'package:flutteflix/styles/style_flix.dart';
 import 'package:flutter/material.dart';
+
+import 'home_page.dart';
 
 class FlutteFlixApp extends StatefulWidget {
   @override
@@ -8,6 +11,15 @@ class FlutteFlixApp extends StatefulWidget {
 class _FlutteFlixAppState extends State<FlutteFlixApp> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return new MaterialApp(
+      theme: new ThemeData(
+        primaryColor: redFlix,
+        scaffoldBackgroundColor: darkGrey,
+        textTheme: new TextTheme(
+          body1: new TextStyle(color: Colors.white),
+        ),
+      ),
+      home: HomePage(),
+    );
   }
 }
