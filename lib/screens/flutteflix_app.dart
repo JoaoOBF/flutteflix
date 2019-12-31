@@ -1,7 +1,6 @@
+import 'package:flutteflix/screens/home/home_page.dart';
 import 'package:flutteflix/styles/style_flix.dart';
 import 'package:flutter/material.dart';
-
-import 'home_page.dart';
 
 class FlutteFlixApp extends StatefulWidget {
   @override
