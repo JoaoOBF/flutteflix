@@ -3,6 +3,7 @@ import 'package:flutteflix/screens/busca/busca_page.dart';
 import 'package:flutteflix/screens/downloads/downloads_page.dart';
 import 'package:flutteflix/screens/home/bloc/home_bloc.dart';
 import 'package:flutteflix/screens/home/home_page.dart';
+import 'package:flutteflix/screens/mais_page.dart';
 import 'package:flutteflix/styles/style_flix.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -37,9 +38,9 @@ class _TabPageState extends State<TabPage> {
                         filmes: snapshot.data,
                       ),
                       BuscaPage(filmes: snapshot.data),
+                      Container(child: Icon(Icons.directions_bike)),
                       DownloadsPage(),
-                      Container(child: Icon(Icons.directions_bike)),
-                      Container(child: Icon(Icons.directions_bike)),
+                      MaisPage(),
                     ],
                   );
                 }

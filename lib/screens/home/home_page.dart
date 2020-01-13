@@ -1,6 +1,7 @@
 import 'package:flutteflix/model/search.dart';
 import 'package:flutteflix/screens/home/bloc/home_bloc.dart';
 import 'package:flutteflix/styles/style_flix.dart';
+import 'package:flutteflix/widgets/header.dart';
 import 'package:flutteflix/widgets/horizontal_list_flix.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,17 @@ class _HomePageState extends State<HomePage>
     return Container(
         child: ListView(
       children: <Widget>[
+        Header(),
+        HorizotalListFlix(
+          titulo: "Prévias",
+          itemCount: widget.filmes.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+              child: _image(widget.filmes[index].poster, rounded: true),
+            );
+          },
+        ),
         HorizotalListFlix(
           titulo: "Populares na Netflix",
           itemCount: widget.filmes.length,
@@ -35,15 +47,6 @@ class _HomePageState extends State<HomePage>
           itemCount: widget.filmes.length,
           itemBuilder: (context, index) {
             return _continuarAssistindoItem(widget.filmes[index]);
-          },
-        ),
-        HorizotalListFlix(
-          titulo: "Populares na Netflix",
-          itemCount: widget.filmes.length,
-          itemBuilder: (context, index) {
-            return Padding(
-                padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-                child: _image(widget.filmes[index].poster));
           },
         ),
         HorizotalListFlix(
@@ -127,7 +130,20 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  _image(String url) {
+  _image(String url, {bool rounded = false}) {
+    if (rounded) {
+      return Container(
+        width: 180.0,
+        height: 180.0,
+        decoration: new BoxDecoration(
+          image: new DecorationImage(
+            image: new NetworkImage(url, scale: 1.0),
+            fit: BoxFit.contain,
+          ),
+          borderRadius: new BorderRadius.all(new Radius.circular(40.0)),
+        ),
+      );
+    }
     return Container(
       width: 170,
       child: Image.network(

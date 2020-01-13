@@ -11,8 +11,24 @@ class _DownloadsPageState extends State<DownloadsPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[_bar(), centerWidget(), botao()],
+      children: <Widget>[
+        _bar(),
+        Expanded(
+          child: ListView(
+            shrinkWrap: true,
+            children: <Widget>[
+              Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.20),
+                  child: centerWidget()),
+              Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.15),
+                  child: botao())
+            ],
+          ),
+        )
+      ],
     );
   }
 
@@ -78,15 +94,22 @@ class _DownloadsPageState extends State<DownloadsPage> {
 
   Widget botao() {
     return Container(
-      margin:
-          EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.10),
+      margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height * 0.10,
+          left: 50,
+          right: 50),
       decoration: new BoxDecoration(
         shape: BoxShape.rectangle,
-        color: Colors.grey[600],
+        color: Colors.white,
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text("Encontre um título para baixar"),
+        child: Center(
+          child: Text(
+            "Encontre um título para baixar",
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+        ),
       ),
     );
   }
