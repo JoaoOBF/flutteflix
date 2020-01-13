@@ -5,87 +5,67 @@ import 'package:flutteflix/widgets/horizontal_list_flix.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  final List<Search> filmes;
+  const HomePage({Key key, this.filmes}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
-  HomeBloc _bloc;
-
-  @override
-  void initState() {
-    _bloc = HomeBloc();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<Search>>(
-        stream: _bloc.subject,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Container(
-                padding: EdgeInsets.only(top: 100),
-                child: ListView(
-                  children: <Widget>[
-                    HorizotalListFlix(
-                      titulo: "Populares na Netflix",
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-                          child: Image.network(
-                            snapshot.data[index].poster,
-                          ),
-                        );
-                      },
-                    ),
-                    HorizotalListFlix(
-                      titulo: "Populares na Netflix",
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        return _continuarAssistindoItem(snapshot.data[index]);
-                      },
-                    ),
-                    HorizotalListFlix(
-                      titulo: "Populares na Netflix",
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                            padding:
-                                const EdgeInsets.only(left: 4.0, right: 4.0),
-                            child: _image(snapshot.data[index].poster));
-                      },
-                    ),
-                    HorizotalListFlix(
-                      titulo: "Populares na Netflix",
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                            padding:
-                                const EdgeInsets.only(left: 4.0, right: 4.0),
-                            child: _image(snapshot.data[index].poster));
-                      },
-                    ),
-                    HorizotalListFlix(
-                      titulo: "Populares na Netflix",
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                            padding:
-                                const EdgeInsets.only(left: 4.0, right: 4.0),
-                            child: _image(snapshot.data[index].poster));
-                      },
-                    ),
-                  ],
-                ));
-          }
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+    return Container(
+        child: ListView(
+      children: <Widget>[
+        HorizotalListFlix(
+          titulo: "Populares na Netflix",
+          itemCount: widget.filmes.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+              child: Image.network(
+                widget.filmes[index].poster,
+              ),
+            );
+          },
+        ),
+        HorizotalListFlix(
+          titulo: "Populares na Netflix",
+          itemCount: widget.filmes.length,
+          itemBuilder: (context, index) {
+            return _continuarAssistindoItem(widget.filmes[index]);
+          },
+        ),
+        HorizotalListFlix(
+          titulo: "Populares na Netflix",
+          itemCount: widget.filmes.length,
+          itemBuilder: (context, index) {
+            return Padding(
+                padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                child: _image(widget.filmes[index].poster));
+          },
+        ),
+        HorizotalListFlix(
+          titulo: "Populares na Netflix",
+          itemCount: widget.filmes.length,
+          itemBuilder: (context, index) {
+            return Padding(
+                padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                child: _image(widget.filmes[index].poster));
+          },
+        ),
+        HorizotalListFlix(
+          titulo: "Populares na Netflix",
+          itemCount: widget.filmes.length,
+          itemBuilder: (context, index) {
+            return Padding(
+                padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                child: _image(widget.filmes[index].poster));
+          },
+        ),
+      ],
+    ));
   }
 
   Widget _continuarAssistindoItem(Search item) {

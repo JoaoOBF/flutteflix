@@ -3,13 +3,13 @@ import 'package:flutteflix/model/omdb.dart';
 import 'package:flutteflix/model/search.dart';
 import 'package:rxdart/rxdart.dart';
 
-class HomeBloc {
+class ApplicationBloc {
   final OMDBRepository _repository = OMDBRepository();
   final BehaviorSubject<List<Search>> _subject =
       BehaviorSubject<List<Search>>();
   List<Search> _list;
 
-  HomeBloc() {
+  ApplicationBloc() {
     getOMDB();
   }
 
