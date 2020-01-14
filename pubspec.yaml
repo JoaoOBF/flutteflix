@@ -26,6 +26,7 @@ dependencies:
   dio: ^3.0.8
   rxdart: ^0.21.0
   flutter_icons: ^1.0.0+1
+  youtube_player_flutter: ^6.0.3+2
 
 dev_dependencies:
   flutter_test:
@@ -42,7 +43,17 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  assets:
+    - assets/poster/f1.png
+    - assets/poster/f2.png
+    - assets/poster/f3.png
+    - assets/poster/f4.png
+    - assets/poster/f5.png
+    - assets/poster/f6.png
+    - assets/poster/f7.png
+    - assets/poster/f8.png
+    - assets/poster/f9.png
+    - assets/poster/f10.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

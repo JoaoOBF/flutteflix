@@ -1,9 +1,15 @@
+import 'dart:io';
+
+import 'package:flutteflix/common/flix_images.dart';
 import 'package:flutteflix/model/search.dart';
-import 'package:flutteflix/screens/home/bloc/home_bloc.dart';
+import 'package:flutteflix/screens/detalhe/detalhe_serie.dart';
 import 'package:flutteflix/styles/style_flix.dart';
+import 'package:flutteflix/widgets/button_flix.dart';
 import 'package:flutteflix/widgets/header.dart';
 import 'package:flutteflix/widgets/horizontal_list_flix.dart';
+import 'package:flutteflix/widgets/player.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomePage extends StatefulWidget {
   final List<Search> filmes;
@@ -15,18 +21,24 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
         child: ListView(
       children: <Widget>[
         Header(),
         HorizotalListFlix(
+          altura: 120,
           titulo: "Prévias",
-          itemCount: widget.filmes.length,
+          itemCount: fts.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-              child: _image(widget.filmes[index].poster, rounded: true),
+              child: _image(url: fts[index], rounded: true),
             );
           },
         ),
@@ -42,6 +54,7 @@ class _HomePageState extends State<HomePage>
             );
           },
         ),
+        _disponivel(),
         HorizotalListFlix(
           titulo: "Populares na Netflix",
           itemCount: widget.filmes.length,
@@ -55,7 +68,27 @@ class _HomePageState extends State<HomePage>
           itemBuilder: (context, index) {
             return Padding(
                 padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-                child: _image(widget.filmes[index].poster));
+                child: _image(url: widget.filmes[index].poster));
+          },
+        ),
+        HorizotalListFlix(
+          tituloWidget: Row(
+            children: <Widget>[
+              Text("Originais netflix"),
+              Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.white,
+                size: 12,
+              )
+            ],
+          ),
+          altura: 300,
+          itemCount: widget.filmes.length,
+          itemBuilder: (context, index) {
+            return Padding(
+                padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                child:
+                    _image(url: widget.filmes[index].poster, largura: 130.0));
           },
         ),
         HorizotalListFlix(
@@ -64,7 +97,7 @@ class _HomePageState extends State<HomePage>
           itemBuilder: (context, index) {
             return Padding(
                 padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-                child: _image(widget.filmes[index].poster));
+                child: _image(url: widget.filmes[index].poster));
           },
         ),
       ],
@@ -76,7 +109,7 @@ class _HomePageState extends State<HomePage>
       padding: const EdgeInsets.only(left: 4.0, right: 4.0),
       child: Stack(
         children: <Widget>[
-          _image(item.poster),
+          _image(url: item.poster),
           Positioned.fill(
             child: Align(
               alignment: Alignment.center,
@@ -130,25 +163,67 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  _image(String url, {bool rounded = false}) {
-    if (rounded) {
-      return Container(
-        width: 180.0,
-        height: 180.0,
-        decoration: new BoxDecoration(
-          image: new DecorationImage(
-            image: new NetworkImage(url, scale: 1.0),
-            fit: BoxFit.contain,
-          ),
-          borderRadius: new BorderRadius.all(new Radius.circular(40.0)),
-        ),
-      );
-    }
-    return Container(
-      width: 170,
-      child: Image.network(
-        url,
-      ),
+  _image({String url, bool rounded = false, var largura = 170.0}) {
+    return InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DetalhesSerie()),
+          );
+        },
+        child: rounded
+            ? ClipRRect(
+                borderRadius: new BorderRadius.circular(8.0),
+                child: Image.asset(
+                  url,
+                  height: 80.0,
+                  width: 100.0,
+                ),
+              )
+            : Container(
+                width: largura,
+                child: Image.network(
+                  url,
+                  fit: BoxFit.cover,
+                ),
+              ));
+  }
+
+  _disponivel() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("Já disponivel: Temporada 1"),
+        Player(),
+        Row(
+          children: <Widget>[
+            Expanded(
+              flex: 3,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                child: ButtomFlix(
+                  txt: 'Assistir',
+                  corB: Colors.white,
+                  corT: Colors.black,
+                  icone: Icons.play_arrow,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                child: ButtomFlix(
+                  txt: 'Minha lista',
+                  corT: Colors.white,
+                  corB: darkGreyF,
+                  icone: Icons.add,
+                ),
+              ),
+            ),
+          ],
+        )
+      ],
     );
   }
 

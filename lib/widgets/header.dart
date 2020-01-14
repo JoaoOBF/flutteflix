@@ -1,3 +1,4 @@
+import 'package:flutteflix/widgets/button_flix.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -70,25 +71,11 @@ class Header extends StatelessWidget {
           padding: const EdgeInsets.only(left: 15.0, right: 15),
           child: itemAction("Minha lista", Icons.check),
         ),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: Colors.white,
-          ),
-          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-          child: Row(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Icon(Icons.play_arrow),
-              ),
-              Text(
-                'Assistir',
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              )
-            ],
-          ),
+        ButtomFlix(
+          txt: 'Assistir',
+          corB: Colors.white,
+          corT: Colors.black,
+          icone: Icons.play_arrow,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 15.0, right: 15),

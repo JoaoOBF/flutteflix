@@ -4,10 +4,17 @@ import 'package:flutter/material.dart';
 class HorizotalListFlix extends StatelessWidget {
   final String titulo;
   final int itemCount;
+  final double altura;
+  final Widget tituloWidget;
   final Function(BuildContext, int) itemBuilder;
 
   const HorizotalListFlix(
-      {Key key, this.titulo, this.itemCount, this.itemBuilder})
+      {Key key,
+      this.titulo,
+      this.itemCount,
+      this.itemBuilder,
+      this.tituloWidget,
+      this.altura = 250})
       : super(key: key);
 
   @override
@@ -16,16 +23,17 @@ class HorizotalListFlix extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            titulo,
-            style: whiteBoldStyle,
-          ),
-        ),
+        tituloWidget ??
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                titulo,
+                style: whiteBoldStyle,
+              ),
+            ),
         Container(
           width: MediaQuery.of(context).size.width,
-          height: 250,
+          height: altura,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: itemCount,
