@@ -9,6 +9,7 @@ import 'package:flutteflix/widgets/header.dart';
 import 'package:flutteflix/widgets/horizontal_list_flix.dart';
 import 'package:flutteflix/widgets/player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,6 +28,9 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, //or set color with: Color(0xFF0000FF)
+    ));
     return Container(
         child: ListView(
       children: <Widget>[

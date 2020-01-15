@@ -26,27 +26,25 @@ class _TabPageState extends State<TabPage> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 5,
-      child: SafeArea(
-        child: Scaffold(
-          body: StreamBuilder<List<Search>>(
-              stream: _bloc.subject,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return TabBarView(
-                    children: [
-                      HomePage(
-                        filmes: snapshot.data,
-                      ),
-                      BuscaPage(filmes: snapshot.data),
-                      Container(child: Icon(Icons.directions_bike)),
-                      DownloadsPage(),
-                      MaisPage(),
-                    ],
-                  );
-                }
-              }),
-          bottomNavigationBar: menu(),
-        ),
+      child: Scaffold(
+        body: StreamBuilder<List<Search>>(
+            stream: _bloc.subject,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return TabBarView(
+                  children: [
+                    HomePage(
+                      filmes: snapshot.data,
+                    ),
+                    BuscaPage(filmes: snapshot.data),
+                    Container(child: Icon(Icons.directions_bike)),
+                    DownloadsPage(),
+                    MaisPage(),
+                  ],
+                );
+              }
+            }),
+        bottomNavigationBar: menu(),
       ),
     );
   }

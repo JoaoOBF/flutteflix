@@ -1,4 +1,5 @@
 import 'package:flutteflix/widgets/picker_temp.dart';
+import 'package:flutteflix/widgets/temporada_list.dart';
 import 'package:flutter/material.dart';
 
 class EpisodiosTab extends StatelessWidget {
@@ -7,46 +8,12 @@ class EpisodiosTab extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 35, left: 5),
       child: ListView(
-        children: <Widget>[
-          expandedList(context),
-          corpo(),
-          corpo(),
-          corpo(),
-          corpo()
-        ],
+        children: <Widget>[TemporadaList(), corpo(), corpo(), corpo(), corpo()],
       ),
     );
   }
 
 //Color.fromRGBO(51, 51, 51, 1),
-  Widget expandedList(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      child: InkWell(
-        onTap: () {
-          Navigator.of(context).push(PageRouteBuilder(
-              opaque: false,
-              pageBuilder: (BuildContext context, _, __) => PickeTemp()));
-        },
-        child: Container(
-          color: Color.fromRGBO(51, 51, 51, 1),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                "1 temporada",
-                style: TextStyle(color: Colors.grey),
-              ),
-              Icon(
-                Icons.arrow_drop_down,
-                color: Colors.grey,
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget corpo() {
     return Column(children: <Widget>[

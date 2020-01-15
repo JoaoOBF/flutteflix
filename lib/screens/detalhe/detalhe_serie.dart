@@ -1,5 +1,6 @@
 import 'package:flutteflix/screens/detalhe/tab_bar_detalhes.dart';
 import 'package:flutteflix/styles/style_flix.dart';
+import 'package:flutteflix/widgets/like_widget.dart';
 import 'package:flutteflix/widgets/player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -44,15 +45,15 @@ class DetalhesSerie extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                _item('Minha lista', Icons.add),
+                _item('Minha lista', Icons.add, context),
                 SizedBox(
                   width: 30,
                 ),
-                _item('Classifique', EvilIcons.like),
+                _item('Classifique', EvilIcons.like, context),
                 SizedBox(
                   width: 30,
                 ),
-                _item('Compartilhe', Icons.share)
+                _item('Compartilhe', Icons.share, context)
               ],
             ),
             SizedBox(
@@ -109,13 +110,27 @@ class DetalhesSerie extends StatelessWidget {
     );
   }
 
-  Widget _item(String txt, IconData icone) {
+  Widget _item(String txt, IconData icone, BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Icon(
-          icone,
-          color: Colors.white,
+        GestureDetector(
+          onTapUp: (TapUpDetails details) {
+            Offset pos =
+                Offset(details.globalPosition.dx, details.globalPosition.dy);
+            Navigator.of(context).push(PageRouteBuilder(
+                opaque: false,
+                pageBuilder: (BuildContext context, _, __) => LikeWidget(
+                      pos: pos,
+                    )));
+          },
+          child: Hero(
+            tag: txt,
+            child: Icon(
+              icone,
+              color: Colors.white,
+            ),
+          ),
         ),
         SizedBox(
           height: 3,
