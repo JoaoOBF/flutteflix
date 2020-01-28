@@ -11,6 +11,7 @@ class _FlutteFlixAppState extends State<FlutteFlixApp> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: new ThemeData(
           primaryColor: redFlix,
           scaffoldBackgroundColor: darkGrey,

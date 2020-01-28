@@ -5,6 +5,7 @@ import 'package:flutteflix/model/search.dart';
 import 'package:flutteflix/screens/detalhe/detalhe_serie.dart';
 import 'package:flutteflix/styles/style_flix.dart';
 import 'package:flutteflix/widgets/button_flix.dart';
+import 'package:flutteflix/widgets/custom_app_bar.dart';
 import 'package:flutteflix/widgets/header.dart';
 import 'package:flutteflix/widgets/horizontal_list_flix.dart';
 import 'package:flutteflix/widgets/player.dart';
@@ -14,7 +15,8 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomePage extends StatefulWidget {
   final List<Search> filmes;
-  const HomePage({Key key, this.filmes}) : super(key: key);
+  final String tag;
+  const HomePage({Key key, this.filmes, this.tag}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -31,9 +33,12 @@ class _HomePageState extends State<HomePage>
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent, //or set color with: Color(0xFF0000FF)
     ));
-    return Container(
-        child: ListView(
+    var listView = ListView(
       children: <Widget>[
+        CustomAppBar(
+          tag: widget.tag,
+          filmes: widget.filmes,
+        ),
         Header(),
         HorizotalListFlix(
           altura: 120,
@@ -105,7 +110,12 @@ class _HomePageState extends State<HomePage>
           },
         ),
       ],
-    ));
+    );
+    return widget.tag == null
+        ? Container(child: listView)
+        : Scaffold(
+            body: listView,
+          );
   }
 
   Widget _continuarAssistindoItem(Search item) {
