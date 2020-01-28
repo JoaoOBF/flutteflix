@@ -15,14 +15,13 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomePage extends StatefulWidget {
   final List<Search> filmes;
-  final String tag;
-  const HomePage({Key key, this.filmes, this.tag}) : super(key: key);
+
+  const HomePage({Key key, this.filmes}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with AutomaticKeepAliveClientMixin {
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
@@ -35,10 +34,6 @@ class _HomePageState extends State<HomePage>
     ));
     var listView = ListView(
       children: <Widget>[
-        CustomAppBar(
-          tag: widget.tag,
-          filmes: widget.filmes,
-        ),
         Header(),
         HorizotalListFlix(
           altura: 120,
@@ -111,11 +106,7 @@ class _HomePageState extends State<HomePage>
         ),
       ],
     );
-    return widget.tag == null
-        ? Container(child: listView)
-        : Scaffold(
-            body: listView,
-          );
+    return Container(child: listView);
   }
 
   Widget _continuarAssistindoItem(Search item) {
@@ -240,8 +231,4 @@ class _HomePageState extends State<HomePage>
       ],
     );
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }

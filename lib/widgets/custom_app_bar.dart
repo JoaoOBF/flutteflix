@@ -16,17 +16,20 @@ class CustomAppBar extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: tag == null ? 8.0 : 0, left: 8),
-            child: Hero(
-                tag: 'topBarBtn',
-                child: Icon(
-                  Ionicons.logo_android,
-                  color: Colors.red,
-                )),
+          Flexible(
+            child: Padding(
+              padding: EdgeInsets.only(right: tag == null ? 8.0 : 0, left: 8),
+              child: Hero(
+                  tag: 'topBarBtn',
+                  child: Icon(
+                    Ionicons.logo_android,
+                    color: Colors.red,
+                  )),
+            ),
           ),
           tag != null
               ? Flexible(
+                  flex: 5,
                   child: Container(
                     child: _textWidget(
                       context,
@@ -36,8 +39,10 @@ class CustomAppBar extends StatelessWidget {
                 )
               : Container(),
           Expanded(
+            flex: 5,
             child: Container(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   tag == null ? _textWidget(context, "Séries") : Container(),
                   tag == null ? _textWidget(context, "Filmes") : Container(),
@@ -57,29 +62,7 @@ class CustomAppBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(PageRouteBuilder<Null>(
-            pageBuilder: (
-              BuildContext context,
-              Animation<double> animation,
-              Animation<double> secondaryAnimation,
-            ) =>
-                HomePage(
-              tag: tagHero,
-              filmes: filmes,
-            ),
-            transitionsBuilder: (
-              BuildContext context,
-              Animation<double> animation,
-              Animation<double> secondaryAnimation,
-              Widget child,
-            ) =>
-                FadeTransition(
-              opacity: animation,
-              child: child,
-            ),
-          ));
-        },
+        onTap: () {},
         child: Hero(
           tag: tagHero,
           child: Container(
