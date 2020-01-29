@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class PickeTemp extends StatelessWidget {
   final Function(String s) callback;
   final String temp;
+  final List<Widget> list;
 
-  const PickeTemp({Key key, this.callback, this.temp}) : super(key: key);
+  const PickeTemp({Key key, this.callback, this.temp, this.list})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,28 +14,35 @@ class PickeTemp extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Center(
-            child: new ListView(
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(20.0),
-                children: [
-                  txt('Temporada 1', context),
-                  txt('Temporada 2', context),
-                  txt('Temporada 3', context)
-                ]),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 60),
+              child: new ListView(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(20.0),
+                  children: list ??
+                      [
+                        txt('Temporada 1', context),
+                        txt('Temporada 2', context),
+                        txt('Temporada 3', context)
+                      ]),
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              height: 45,
-              decoration: new BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-              child: Center(
-                child: IconButton(
-                  icon: Icon(Icons.close),
-                  onPressed: () => Navigator.of(context).pop(),
-                  color: Colors.black,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 45,
+                decoration: new BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () => Navigator.of(context).pop(),
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
